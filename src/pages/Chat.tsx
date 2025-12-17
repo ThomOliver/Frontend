@@ -16,20 +16,22 @@ export default function Chat() {
   useEffect(() => {
     if (!room || !username) return;
 
+    socket.connect();
+
     const joinRoomOnce = () => {
       if (joinedRef.current) return;
-      if (!socket.id) return;
 
       joinedRef.current = true;
 
-      setSocketId(socket.id);
+      setSocketId(socket.id!);
 
       socket.emit('join-room', {
         room,
         username,
       });
-    };
 
+      console.log('🚪 Entrou na sala:', room);
+    };
 
     const handleNewMessage = (msg: Message) => {
       addMessage(msg);
@@ -54,6 +56,9 @@ export default function Chat() {
       socket.off('connect', joinRoomOnce);
       socket.off('new-message', handleNewMessage);
       socket.off('system-message', handleSystemMessage);
+
+      socket.disconnect();
+      joinedRef.current = false;
     };
   }, [room, username, addMessage, setSocketId]);
 

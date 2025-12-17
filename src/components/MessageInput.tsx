@@ -94,9 +94,7 @@ async function sendImage(file: File) {
 
   return (
     <>
-      {/* INPUT BAR */}
       <div className="relative p-3 flex gap-2 items-center border-t bg-background">
-        {/* Emoji */}
         <Button
           size="icon"
           variant="ghost"
@@ -115,7 +113,6 @@ async function sendImage(file: File) {
           </div>
         )}
 
-        {/* Texto */}
         <Input
           placeholder="Digite sua mensagem..."
           value={message}
@@ -123,7 +120,6 @@ async function sendImage(file: File) {
           onKeyDown={(e) => e.key === 'Enter' && sendText()}
         />
 
-        {/* Upload imagem */}
         <label className="cursor-pointer flex items-center">
           <ImageIcon size={18} />
           <input
@@ -145,11 +141,9 @@ async function sendImage(file: File) {
           />
         </label>
 
-        {/* Enviar texto */}
         <Button onClick={sendText}>Enviar</Button>
       </div>
 
-      {/* MODAL CONFIRMAÇÃO IMAGEM */}
       <Dialog
         open={!!selectedImage}
         onOpenChange={(open) => {
