@@ -150,7 +150,7 @@ docker-compose down
 
 ---
 
-## 🔌 WebSocket
+## WebSocket
 
 A comunicação em tempo real é feita via **Socket.IO**.
 
@@ -186,12 +186,6 @@ npm run test
   "test": "vitest"
 }
 ```
-
----
-
-## Licença
-
-Projeto desenvolvido para fins de estudo e desafio técnico.
 
 ---
 
