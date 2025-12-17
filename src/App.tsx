@@ -1,31 +1,27 @@
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Login from './pages/Login';
 import Chat from './pages/Chat';
 import { useChatStore } from './store/chat.store';
-import { useEffect } from 'react';
 
 export default function App() {
   const navigate = useNavigate();
-
+  const username = useChatStore((state) => state.username);
   useEffect(() => {
     navigate('/', { replace: true });
   }, []);
 
-  const username = useChatStore((state) => state.username);
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={username ? <Navigate to="/chat" /> : <Login />}
-        />
+    <Routes>
+      <Route
+        path="/"
+        element={username ? <Navigate to="/chat" replace /> : <Login />}
+      />
 
-        <Route
-          path="/chat"
-          element={username ? <Chat /> : <Navigate to="/" />}
-        />
-      </Routes>
-    </BrowserRouter>
+      <Route
+        path="/chat"
+        element={username ? <Chat /> : <Navigate to="/" replace />}
+      />
+    </Routes>
   );
 }
